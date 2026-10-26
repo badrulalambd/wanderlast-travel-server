@@ -55,6 +55,26 @@ app.post('/destinations', async (req, res) => {
     
 })
 
+//Create API for update(put, patch) the data in mongoDB database
+app.patch('/destinations/:id', async (req, res) => {
+  const {id} = req.params;
+  const updatedData = req.body;
+  const result = await destinationCollection.updateOne(
+    {_id: new ObjectId(id)},
+    {$set: updatedData}
+  );
+  console.log(result);
+  res.json(result);
+})
+
+//Create API for deleting destination from the database
+app.delete('/destinations/:id', async (req, res) => {
+  const {id} = req.params;
+  const result = await destinationCollection.deleteOne({_id: new ObjectId(id)});
+  res.send(result);
+  console.log(result);
+})
+
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
