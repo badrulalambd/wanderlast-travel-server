@@ -45,7 +45,7 @@ const verifyUserWithMiddlewareToken = async (req, res, next) => {
   }
 
   const JWKS = createRemoteJWKSet(
-    new URL(`${process.env.BASE_URL}/api/auth/jwks`)
+    new URL(`${process.env.CLIENT_URL}/api/auth/jwks`)
   )
 
   try {
@@ -138,3 +138,5 @@ app.delete('/my-bookings/:id', verifyUserWithMiddlewareToken, async (req, res) =
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+
+export default app
