@@ -76,7 +76,7 @@ res.send(result);
 })
 
 //Create API for getting single data from mongoDB database
-app.get(`/destinations/:id`, verifyUserWithMiddlewareToken, async (req, res) => {
+app.get(`/destinations/:id`, async (req, res) => {
   const id = req.params.id;
   const query = { _id: new ObjectId(id) };
   const result = await destinationCollection.findOne(query);
